@@ -1,9 +1,0 @@
-{
-  "name": "kts-economic",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/kts-economic",
-  "projectType": "application",
-  "tags": [],
-  "// targets": "to see all targets run: nx show project kts-economic --web",
-  "targets": {}
-}
