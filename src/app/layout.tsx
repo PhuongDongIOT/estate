@@ -6,7 +6,6 @@ import NextTopLoader from 'nextjs-toploader';
 import { Inter } from 'next/font/google';
 import { ApolloProvider } from "@apollo/client";
 import createApolloClient from "./apollo-client";
-import { ClerkProvider } from '@clerk/nextjs';
 import { siteConfig } from '@/config/site';
 import { absoluteUrl } from '@/lib/utils';
 import { env } from '@/env.js';
@@ -75,26 +74,24 @@ export default async function RootLayout({
 }) {
   // const session = await auth();
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <link rel="manifest" href="/site.webmanifest" />
-        </head>
-        <body
-          className={`${inter.className}`}
-          suppressHydrationWarning={true}
-        >
-          <NextTopLoader showSpinner={false} />
-          <Providers>
-            <Toaster />
-            {/* <ApolloProvider client={client}> */}
-            <TRPCProvider>
-              {children}
-            </TRPCProvider>
-            {/* </ApolloProvider> */}
-          </Providers>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
+      <body
+        className={`${inter.className}`}
+        suppressHydrationWarning={true}
+      >
+        <NextTopLoader showSpinner={false} />
+        <Providers>
+          <Toaster />
+          {/* <ApolloProvider client={client}> */}
+          <TRPCProvider>
+            {children}
+          </TRPCProvider>
+          {/* </ApolloProvider> */}
+        </Providers>
+      </body>
+    </html>
   );
 }

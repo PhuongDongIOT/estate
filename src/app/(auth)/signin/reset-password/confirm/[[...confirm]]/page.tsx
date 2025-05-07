@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Shell } from "@/components/atoms/shell"
-import { ResetPasswordConfirmForm } from "@/app/(auth)/_components/reset-password-confirm-form"
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -28,7 +27,7 @@ export default function ResetPasswordConfirmPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ResetPasswordConfirmForm />
+          {/* <ResetPasswordConfirmForm /> */}
         </CardContent>
       </Card>
     </Shell>

@@ -1,10 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useSignIn } from "@clerk/nextjs"
-import { type OAuthStrategy } from "@clerk/types"
-
-import { showErrorToast } from "@/lib/handle-error"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/atoms/icons"
 
@@ -14,28 +10,11 @@ const oauthProviders = [
 ] satisfies {
   name: string
   icon: keyof typeof Icons
-  strategy: OAuthStrategy
+  strategy: string
 }[]
 
 export function OAuthSignIn() {
-  const [loading, setLoading] = React.useState<OAuthStrategy | null>(null)
-  const { signIn, isLoaded: signInLoaded } = useSignIn()
-
-  async function oauthSignIn(provider: OAuthStrategy) {
-    if (!signInLoaded) return null
-
-    try {
-      setLoading(provider)
-      await signIn.authenticateWithRedirect({
-        strategy: provider,
-        redirectUrl: "/sso-callback",
-        redirectUrlComplete: "/",
-      })
-    } catch (err) {
-      setLoading(null)
-      showErrorToast(err)
-    }
-  }
+  const [loading, setLoading] = React.useState<null>(null)
 
   return (
     <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
@@ -47,7 +26,7 @@ export function OAuthSignIn() {
             key={provider.strategy}
             variant="outline"
             className="w-full bg-background"
-            onClick={() => void oauthSignIn(provider.strategy)}
+            // onClick={() => void oauthSignIn(provider.strategy)}
             disabled={loading !== null}
           >
             {loading === provider.strategy ? (

@@ -1,9 +1,7 @@
-import type { User } from "@clerk/nextjs/server"
-
-import { AuthDropdown } from "@/components/layout/auth-dropdown"
+// import { AuthDropdown } from "@/components/layout/auth-dropdown"
 
 interface DashboardHeaderProps {
-  user: User
+  user: null
   storeId: string
   children: React.ReactNode
 }
@@ -19,7 +17,7 @@ export function DashboardHeader({
         {children}
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
-            <AuthDropdown user={user} />
+            {/* <AuthDropdown user={user} /> */}
           </nav>
         </div>
       </div>

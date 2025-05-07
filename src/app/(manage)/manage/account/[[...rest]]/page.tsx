@@ -9,8 +9,6 @@ import {
 } from "@/components/molecules/page-header"
 import { Shell } from "@/components/atoms/shell"
 
-import { UserProfile } from "./_components/user-profile"
-
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: "Account",
@@ -27,7 +25,7 @@ export default function AccountPage() {
         </PageHeaderDescription>
       </PageHeader>
       <ScrollArea className="w-full pb-3.5">
-        <UserProfile />
+        {/* <UserProfile /> */}
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </Shell>

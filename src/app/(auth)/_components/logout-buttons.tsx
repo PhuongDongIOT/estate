@@ -1,7 +1,6 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { SignOutButton } from "@clerk/nextjs"
 
 import { cn } from "@/lib/utils"
 import { useMounted } from "@/hooks/use-mounted"
@@ -23,16 +22,7 @@ export function LogOutButtons() {
         Go back
         <span className="sr-only">Previous page</span>
       </Button>
-      {mounted ? (
-        <SignOutButton
-          redirectUrl={`${window.location.origin}/?redirect=false`}
-        >
-          <Button size="sm" className="w-full">
-            Log out
-            <span className="sr-only">Log out</span>
-          </Button>
-        </SignOutButton>
-      ) : (
+      {mounted ? null : (
         <Skeleton
           className={cn(
             buttonVariants({ size: "sm" }),

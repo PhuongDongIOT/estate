@@ -8,7 +8,6 @@ import {
 import { redirect } from "next/navigation"
 import { db } from "@/db"
 import { stores } from "@/db/schema"
-import { auth } from "@clerk/nextjs/server"
 import { and, desc, eq, not } from "drizzle-orm"
 import { slugify } from "@/lib/utils"
 import {
@@ -91,7 +90,7 @@ export async function updateStore(storeId: string, fd: FormData) {
 }
 
 export async function deleteStore(storeId: string) {
-  const { userId } = await auth()
+  const userId = null;
 
   if (!userId) {
     throw new Error("Unauthorized")

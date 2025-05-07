@@ -1,13 +1,12 @@
-import type { User } from "@clerk/nextjs/server"
 import { siteConfig } from "@/config/site"
 import { CartSheet } from "@/components/organims/checkout/cart-sheet"
-import { AuthDropdown } from "@/components/layout/auth-dropdown"
+// import { AuthDropdown } from "@/components/layout/auth-dropdown"
 import { MainNav } from "@/components/layout/main-nav"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { ProductsCombobox } from "@/components/organims/products-combobox"
 
 interface SiteHeaderProps {
-  user: User | null
+  user: null
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
@@ -20,7 +19,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
           <nav className="flex items-center space-x-2">
             <ProductsCombobox />
             <CartSheet />
-            <AuthDropdown user={user} />
+            {/* <AuthDropdown user={user} /> */}
           </nav>
         </div>
       </div>

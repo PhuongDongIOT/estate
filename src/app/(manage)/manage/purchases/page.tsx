@@ -6,9 +6,6 @@ import { orders, stores, type Order } from "@/db/schema"
 import { env } from "@/env.js"
 import type { SearchParams } from "@/types"
 import { and, asc, desc, eq, inArray, like, sql } from "drizzle-orm"
-
-import { getCachedUser } from "@/lib/queries/user"
-import { getUserEmail } from "@/lib/utils"
 import { purchasesSearchParamsSchema } from "@/lib/validations/params"
 import { DataTableSkeleton } from "@/components/organims/data-table/data-table-skeleton"
 import {
@@ -33,14 +30,6 @@ export default async function PurchasesPage({
 }: PurchasesPageProps) {
   const { page, per_page, sort, store, status } =
     purchasesSearchParamsSchema.parse(searchParams)
-
-  const user = await getCachedUser()
-
-  if (!user) {
-    redirect("/signin")
-  }
-
-  const email = getUserEmail(user)
 
   // Fallback page for invalid page numbers
   const fallbackPage = isNaN(page) || page < 1 ? 1 : page
@@ -77,7 +66,6 @@ export default async function PurchasesPage({
         .offset(offset)
         .where(
           and(
-            eq(orders.email, email),
             // Filter by store
             typeof store === "string"
               ? like(stores.name, `%${store}%`)
@@ -104,7 +92,6 @@ export default async function PurchasesPage({
         .leftJoin(stores, eq(orders.storeId, stores.id))
         .where(
           and(
-            eq(orders.email, email),
             // Filter by store
             typeof store === "string"
               ? like(stores.name, `%${store}%`)

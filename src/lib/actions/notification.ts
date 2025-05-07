@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache"
 import { db } from "@/db"
 import { notifications } from "@/db/schema"
 import { env } from "@/env.js"
-import { currentUser } from "@clerk/nextjs/server"
 import { eq } from "drizzle-orm"
 import { resend } from "@/lib/resend"
 import type { UpdateNotificationSchema } from "@/lib/validations/notification"
@@ -25,15 +24,13 @@ export async function updateNotification(input: UpdateNotificationSchema) {
       throw new Error("Email not found.")
     }
 
-    const user = await currentUser()
-
     if (input.newsletter && !notification.newsletter) {
       await resend.emails.send({
         from: env.EMAIL_FROM_ADDRESS,
         to: notification.email,
         subject: "Welcome to skateshop",
         react: NewsletterWelcomeEmail({
-          firstName: user?.firstName ?? undefined,
+          firstName: undefined,
           fromEmail: env.EMAIL_FROM_ADDRESS,
           token: input.token,
         }),
@@ -44,7 +41,7 @@ export async function updateNotification(input: UpdateNotificationSchema) {
       .update(notifications)
       .set({
         ...input,
-        userId: user?.id,
+        // userId: user?.id,
       })
       .where(eq(notifications.token, input.token))
 

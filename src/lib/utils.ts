@@ -4,7 +4,6 @@ import { Active, DataRef, Over } from '@dnd-kit/core';
 import { ColumnDragData } from '@/sections/kanban/board-column';
 import { TaskDragData } from '@/sections/kanban/task-card';
 import { env } from "@/env.js"
-import { User } from "@clerk/nextjs/server";
 
 type DraggableData = ColumnDragData | TaskDragData;
 
@@ -124,12 +123,4 @@ export function isMacOs() {
   if (typeof window === "undefined") return false
 
   return window.navigator.userAgent.includes("Mac")
-}
-
-export function getUserEmail(user: User | null) {
-  const email =
-    user?.emailAddresses?.find((e) => e.id === user.primaryEmailAddressId)
-      ?.emailAddress ?? ""
-
-  return email
 }

@@ -1,9 +1,7 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
 import { env } from "@/env.js"
 
 import { getCategories, getSubcategories } from "@/lib/queries/product"
-import { getCachedUser } from "@/lib/queries/user"
 import {
   Card,
   CardContent,
@@ -28,12 +26,6 @@ interface NewProductPageProps {
 
 export default async function NewProductPage({ params }: NewProductPageProps) {
   const storeId = decodeURIComponent(params.storeId)
-
-  const user = await getCachedUser()
-
-  if (!user) {
-    redirect("/sigin")
-  }
 
   const promises = Promise.all([getCategories(), getSubcategories()]).then(
     ([categories, subcategories]) => ({ categories, subcategories })

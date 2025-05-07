@@ -1,13 +1,10 @@
 import * as React from "react"
 import { type Metadata } from "next"
-import { redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs/server"
-
 import { Skeleton } from "@/components/ui/skeleton"
 import { GridPattern } from "@/components/organims/grid-pattern"
 import { Shell } from "@/components/atoms/shell"
 
-import { Onboarding } from "./_components/onboarding"
+// import { Onboarding } from "./_components/onboarding"
 
 export const metadata: Metadata = {
   title: "Onboarding",
@@ -15,11 +12,6 @@ export const metadata: Metadata = {
 }
 
 export default async function OnboardingPage() {
-  const { userId } = await auth()
-
-  if (!userId) {
-    redirect("/signin")
-  }
 
   return (
     <Shell className="h-[calc(100vh-4rem)] max-w-screen-sm">
@@ -32,7 +24,7 @@ export default async function OnboardingPage() {
         className="[mask-image:radial-gradient(300px_circle_at_left_top,white,transparent)]"
       />
       <React.Suspense fallback={<Skeleton className="size-full" />}>
-        <Onboarding userId={userId} />
+        {/* <Onboarding userId={userId} /> */}
       </React.Suspense>
     </Shell>
   )
